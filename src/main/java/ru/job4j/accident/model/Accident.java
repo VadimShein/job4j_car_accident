@@ -1,23 +1,41 @@
 package ru.job4j.accident.model;
 
+import org.springframework.stereotype.Component;
+
 import java.io.File;
+import java.util.Date;
 import java.util.Objects;
 
-public class Task {
+@Component
+public class Accident {
     private int id;
     private String address;
     private String carNumber;
     private String description;
     private File photo;
+    private String author;
+    private Date created;
     private String status;
 
-    public Task() {
+    public Accident() {
     }
 
-    public Task(String address, String carNumber, String description, String status) {
-        this.address = address;
-        this.carNumber = carNumber;
+    public Accident(int id, String description, String carNumber, String address, Date created, String author, String status) {
+        this.id = id;
         this.description = description;
+        this.carNumber = carNumber;
+        this.address = address;
+        this.created = created;
+        this.author = author;
+        this.status = status;
+    }
+
+    public Accident(String description, String carNumber, String address, Date created, String author, String status) {
+        this.description = description;
+        this.carNumber = carNumber;
+        this.address = address;
+        this.created = created;
+        this.author = author;
         this.status = status;
     }
 
@@ -61,6 +79,22 @@ public class Task {
         this.photo = photo;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -77,8 +111,8 @@ public class Task {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Task task = (Task) o;
-        return id == task.id;
+        Accident accident = (Accident) o;
+        return id == accident.id;
     }
 
     @Override

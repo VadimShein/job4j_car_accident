@@ -1,7 +1,10 @@
 package ru.job4j.accident.model;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 
+@Component
 public class User {
     private int id;
     private String name;

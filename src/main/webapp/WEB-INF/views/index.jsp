@@ -37,25 +37,27 @@
                         <tr>
                             <th style="width: 40px; text-align: center">№</th>
                             <th style="width: 170px; text-align: center">Фото</th>
-                            <th style="text-align: center">Адрес</th>
-                            <th style="text-align: center">Номер машины</th>
                             <th style="text-align: center">Описание</th>
+                            <th style="text-align: center">Номер машины</th>
+                            <th style="text-align: center">Адрес</th>
                             <th style="text-align: center">Дата</th>
                             <th style="text-align: center">Автор</th>
                             <th style="text-align: center">Статус</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><c:out value="${item[0]}"/></td>
-                        <td><c:out value="${item[1]}"/></td>
-                        <td><c:out value="${item[2]}"/></td>
-                        <td><c:out value="${item[3]}"/></td>
-                        <td><c:out value="${item[4]}"/></td>
-                        <td><c:out value="${item[5]}"/></td>
-                        <td><c:out value="${item[6]}"/></td>
-                        <td><c:out value="${item[7]}"/></td>
-                    </tr>
+                        <c:forEach items="${accidents}" var="map">
+                            <tr>
+                                <td><c:out value="${map.id}"/></td>
+                                <td><c:out value="${map.photo}"/></td>
+                                <td><c:out value="${map.description}"/></td>
+                                <td><c:out value="${map.carNumber}"/></td>
+                                <td><c:out value="${map.address}"/></td>
+                                <td><c:out value="${map.created}"/></td>
+                                <td><c:out value="${map.author}"/></td>
+                                <td><c:out value="${map.status}"/></td>
+                            </tr>
+                        </c:forEach>
                     </tbody>
                 </table>
             </div>
