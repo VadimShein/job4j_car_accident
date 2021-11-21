@@ -46,6 +46,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <tr>
+                        <td><c:out value="${item[0]}"/></td>
+                        <td><c:out value="${item[1]}"/></td>
+                        <td><c:out value="${item[2]}"/></td>
+                        <td><c:out value="${item[3]}"/></td>
+                        <td><c:out value="${item[4]}"/></td>
+                        <td><c:out value="${item[5]}"/></td>
+                        <td><c:out value="${item[6]}"/></td>
+                        <td><c:out value="${item[7]}"/></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
