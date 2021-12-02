@@ -9,33 +9,24 @@ import java.util.Objects;
 @Component
 public class Accident {
     private int id;
-    private String address;
-    private String carNumber;
-    private String description;
     private File photo;
-    private String author;
+    private String carNumber;
+    private String address;
+    private String description;
     private Date created;
+    private String author;
     private String status;
 
     public Accident() {
     }
 
-    public Accident(int id, String description, String carNumber, String address, Date created, String author, String status) {
+    public Accident(int id, String carNumber, String address, String description, Date created, String author, String status) {
         this.id = id;
-        this.description = description;
         this.carNumber = carNumber;
         this.address = address;
-        this.created = created;
-        this.author = author;
-        this.status = status;
-    }
-
-    public Accident(String description, String carNumber, String address, Date created, String author, String status) {
         this.description = description;
-        this.carNumber = carNumber;
-        this.address = address;
-        this.created = created;
         this.author = author;
+        this.created = created;
         this.status = status;
     }
 

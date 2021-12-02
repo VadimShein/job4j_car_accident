@@ -6,21 +6,26 @@ import ru.job4j.accident.model.Accident;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMemStore implements AccidentStore {
+    private static final AtomicInteger COUNT = new AtomicInteger();
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
 
     public AccidentMemStore() {
-       add(new Accident(1, "crash", "N001", "address1",
-                new Date(System.currentTimeMillis()), "user1", "in progress"));
-        add(new Accident(2, "crash", "N002", "address2",
-                new Date(System.currentTimeMillis()), "user2", "in progress"));
-        add(new Accident(3, "crash", "N003", "address3",
-                new Date(System.currentTimeMillis()), "user3", "in progress"));
+       add(new Accident(COUNT.incrementAndGet(), "N001", "address1", "crash",
+                new Date(System.currentTimeMillis()), "user1", "Processed"));
+        add(new Accident(COUNT.incrementAndGet(), "N002", "address2", "crash",
+                new Date(System.currentTimeMillis()), "user2", "Processed"));
+        add(new Accident(COUNT.incrementAndGet(), "N003", "address3", "crash",
+                new Date(System.currentTimeMillis()), "user3", "Processed"));
     }
 
     public void add(Accident accident) {
+        if (accident.getId() == 0) {
+            accident.setId(COUNT.incrementAndGet());
+        }
         accidents.put(accident.getId(), accident);
     }
 
