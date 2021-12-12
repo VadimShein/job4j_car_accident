@@ -57,23 +57,34 @@
                             <label>№: <c:out value="${accident.id}"/></label><br>
                             <input type="hidden" name="id" value="${accident.id}">
                         </div>
+                        <div id="type">
+                            <label>Тип проишествия: &nbsp</label>
+                            <select name="type.id">
+                                <option value="${accident.type.id}">${accident.type.name}</option>
+                                <c:forEach var="type" items="${types}" >
+                                    <c:if test="${type.id != accident.type.id}">
+                                        <option value="${type.id}">${type.name}</option>
+                                    </c:if>
+                                </c:forEach>
+                            </select>
+                        </div>
                         <div id="carNumber">
-                            <label>Номер Авто:</label><br>
+                            <label>Номер Авто:</label>
                             <input type="text" class="form-control" name="carNumber" value="${accident.carNumber}" title="Заполните поле: Номер Авто">
                         </div>
                         <div id="address">
-                            <label>Адрес:</label><br>
+                            <label>Адрес:</label>
                             <input type="text" class="form-control" name="address" value="${accident.address}" title="Заполните поле: Адрес">
                         </div>
                         <div id="description">
-                            <label>Описание:</label><br>
+                            <label>Описание:</label>
                             <textarea maxlength="255" rows="3" class="form-control" name="description" title="Заполните поле: Описание" style="height: 113px">${accident.description}</textarea>
                         </div>
                         <div id="author">
                             <input type="hidden" name="author" value="${accident.author}">
                         </div>
                         <div id="status">
-                            <label>Статус:</label><br>
+                            <label>Статус:</label>
                             <input type="text" class="form-control" name="status" value="${accident.status}" title="Заполните поле: Статус">
                         </div>
                     </div>

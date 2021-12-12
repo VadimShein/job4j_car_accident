@@ -10,23 +10,24 @@ import java.util.Objects;
 public class Accident {
     private int id;
     private File photo;
+    private AccidentType type = new AccidentType();
     private String carNumber;
     private String address;
     private String description;
-    private Date created;
+    private Date created = new Date(System.currentTimeMillis());
     private String author;
     private String status;
 
     public Accident() {
     }
 
-    public Accident(int id, String carNumber, String address, String description, Date created, String author, String status) {
+    public Accident(int id, AccidentType type, String carNumber, String address, String description, String author, String status) {
         this.id = id;
+        this.type = type;
         this.carNumber = carNumber;
         this.address = address;
         this.description = description;
         this.author = author;
-        this.created = created;
         this.status = status;
     }
 
@@ -36,6 +37,14 @@ public class Accident {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public AccidentType getType() {
+        return type;
+    }
+
+    public void setType(AccidentType type) {
+        this.type = type;
     }
 
     public String getAddress() {

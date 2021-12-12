@@ -53,16 +53,24 @@
             <div class="card-body">
                 <form action="<c:url value='/save'/>" method="post">
                     <div class="form-group">
+                        <div id="type">
+                            <label>Тип проишествия: &nbsp</label>
+                            <select name="type.id">
+                                <c:forEach var="type" items="${types}" >
+                                    <option value="${type.id}">${type.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
                         <div id="carNumber">
-                            <label>Номер Авто:</label><br>
+                            <label>Номер Авто:</label>
                             <input type="text" class="form-control" name="carNumber" title="Заполните поле: Номер Авто">
                         </div>
                         <div id="address">
-                            <label>Адрес:</label><br>
+                            <label>Адрес:</label>
                             <input type="text" class="form-control" name="address" title="Заполните поле: Адрес">
                         </div>
                         <div id="description">
-                            <label>Описание: </label><br>
+                            <label>Описание: </label>
                             <textarea maxlength="255" rows="3" class="form-control" name="description" title="Заполните поле: Описание" style="height: 113px"></textarea>
                         </div>
                         <div id="author">
