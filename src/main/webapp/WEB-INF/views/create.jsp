@@ -54,10 +54,18 @@
                 <form action="<c:url value='/save'/>" method="post">
                     <div class="form-group">
                         <div id="type">
-                            <label>Тип проишествия: &nbsp</label>
-                            <select name="type.id">
+                            <label for="typeSel">Тип проишествия: &nbsp</label>
+                            <select id="typeSel" name="type.id">
                                 <c:forEach var="type" items="${types}" >
                                     <option value="${type.id}">${type.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div id="rule">
+                            <label for="ruleSel" style="vertical-align: top; margin-right: 82px">Статья: &nbsp</label>
+                            <select id="ruleSel" name="rIds" multiple required>
+                                <c:forEach var="rule" items="${rules}">
+                                    <option value="${rule.id}">${rule.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

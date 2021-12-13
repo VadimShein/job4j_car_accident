@@ -58,13 +58,27 @@
                             <input type="hidden" name="id" value="${accident.id}">
                         </div>
                         <div id="type">
-                            <label>Тип проишествия: &nbsp</label>
-                            <select name="type.id">
+                            <label for="typeSel">Тип проишествия: &nbsp</label>
+                            <select id="typeSel" name="type.id">
                                 <option value="${accident.type.id}">${accident.type.name}</option>
                                 <c:forEach var="type" items="${types}" >
                                     <c:if test="${type.id != accident.type.id}">
                                         <option value="${type.id}">${type.name}</option>
                                     </c:if>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div id="rule">
+                            <label for="ruleSel" style="vertical-align: top; margin-right: 82px">Статья: &nbsp</label>
+                            <select id="ruleSel" name="rIds" multiple required>
+                                <c:forEach var="rule" items="${rules}">
+                                    <c:set var="sel" value=""/>
+                                    <c:forEach var="acdRule" items="${accident.rules}" >
+                                        <c:if test="${rule.id eq acdRule.id}">
+                                            <c:set var="sel" value="selected"/>
+                                        </c:if>
+                                    </c:forEach>
+                                    <option ${sel} value="${rule.id}">${rule.name}</option>
                                 </c:forEach>
                             </select>
                         </div>

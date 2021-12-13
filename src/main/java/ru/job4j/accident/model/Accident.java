@@ -5,12 +5,14 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.util.Date;
 import java.util.Objects;
+import java.util.Set;
 
 @Component
 public class Accident {
     private int id;
     private File photo;
     private AccidentType type = new AccidentType();
+    private Set<Rule> rules;
     private String carNumber;
     private String address;
     private String description;
@@ -21,9 +23,10 @@ public class Accident {
     public Accident() {
     }
 
-    public Accident(int id, AccidentType type, String carNumber, String address, String description, String author, String status) {
+    public Accident(int id, AccidentType type, Set<Rule> rules, String carNumber, String address, String description, String author, String status) {
         this.id = id;
         this.type = type;
+        this.rules = rules;
         this.carNumber = carNumber;
         this.address = address;
         this.description = description;
@@ -45,6 +48,14 @@ public class Accident {
 
     public void setType(AccidentType type) {
         this.type = type;
+    }
+
+    public Set<Rule> getRules() {
+        return rules;
+    }
+
+    public void setRules(Set<Rule> rules) {
+        this.rules = rules;
     }
 
     public String getAddress() {

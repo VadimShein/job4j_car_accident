@@ -49,6 +49,7 @@
                         <th style="width: 40px; text-align: center">№</th>
                         <th style="width: 170px; text-align: center">Фото</th>
                         <th style="text-align: center">Тип</th>
+                        <th style="text-align: center">Статья</th>
                         <th style="text-align: center">Описание</th>
                         <th style="text-align: center">Номер машины</th>
                         <th style="text-align: center">Адрес</th>
@@ -66,6 +67,11 @@
                             </td>
                             <td><c:out value="${map.photo}"/></td>
                             <td><c:out value="${map.type.name}"/></td>
+                            <td>
+                                <c:forEach items="${map.rules}" var="rule">
+                                    <c:out value="${rule.name}"/>
+                                </c:forEach>
+                            </td>
                             <td><c:out value="${map.description}"/></td>
                             <td><c:out value="${map.carNumber}"/></td>
                             <td><c:out value="${map.address}"/></td>

@@ -3,9 +3,11 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -13,6 +15,7 @@ public class AccidentMemStore implements AccidentStore {
     private static final AtomicInteger COUNT = new AtomicInteger();
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
     private final HashMap<Integer, AccidentType> accidentTypes = new HashMap<>();
+    private final HashMap<Integer, Rule> rules = new HashMap<>();
 
     public AccidentMemStore() {
         addType(new AccidentType(1, "ДТП двух машин"));
@@ -20,12 +23,21 @@ public class AccidentMemStore implements AccidentStore {
         addType(new AccidentType(3, "ДТП машины и животного"));
         addType(new AccidentType(4, "ДТП машины и ЖД транспорта"));
 
-        add(new Accident(0, new AccidentType(1, "ДТП двух машин"), "N001",
-                "address1", "crash", "user1", "Processed"));
-        add(new Accident(0, new AccidentType(2, "ДТП машины и человека"), "N002",
-                "address2", "crash",  "user2", "Processed"));
-        add(new Accident(0, new AccidentType(4, "ДТП машины и ЖД транспорта"), "N003",
-                "address3", "crash", "user3", "Processed"));
+        addRule((new Rule(1, "статья 1")));
+        addRule((new Rule(2, "статья 2")));
+        addRule((new Rule(3, "статья 3")));
+
+        add(new Accident(0, new AccidentType(1, "ДТП двух машин"),
+                Set.of(new Rule(1, "статья 1"), new Rule(2, "статья 2")),
+                "N001", "address1", "crash", "user1", "Processed"));
+
+        add(new Accident(0, new AccidentType(2, "ДТП машины и человека"),
+                Set.of(new Rule(2, "статья 2")),
+                "N002", "address2", "crash",  "user2", "Processed"));
+
+        add(new Accident(0, new AccidentType(4, "ДТП машины и ЖД транспорта"),
+                Set.of(new Rule(3, "статья 3")),
+                "N003", "address3", "crash", "user3", "Processed"));
     }
 
     public void add(Accident accident) {
@@ -53,5 +65,17 @@ public class AccidentMemStore implements AccidentStore {
 
     public Collection<AccidentType> getAllTypes() {
         return accidentTypes.values();
+    }
+
+    public void addRule(Rule rule) {
+        rules.put(rule.getId(), rule);
+    }
+
+    public Rule getRule(int id) {
+        return rules.get(id);
+    }
+
+    public Collection<Rule> getAllRules() {
+        return rules.values();
     }
 }
