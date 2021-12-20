@@ -13,7 +13,7 @@ public class WebInit implements WebApplicationInitializer {
     @Override
     public void onStartup(ServletContext servletCxt) {
         AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-        context.register(WebConfig.class);
+        context.register(WebConfig.class, JdbcConfig.class);
         context.refresh();
 
         CharacterEncodingFilter filter = new CharacterEncodingFilter();
