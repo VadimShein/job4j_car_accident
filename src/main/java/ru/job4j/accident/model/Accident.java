@@ -2,22 +2,36 @@ package ru.job4j.accident.model;
 
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
 @Component
+@Entity
+@Table(name = "accident")
 public class Accident {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private File photo;
+    @ManyToOne
     private AccidentType type = new AccidentType();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "accident_rules",
+            joinColumns = @JoinColumn(name = "accident_id"),
+            inverseJoinColumns = @JoinColumn(name = "rules_id"))
     private Set<Rule> rules;
+    @Column(nullable = false)
     private String carNumber;
+    @Column(nullable = false)
     private String address;
     private String description;
     private Date created = new Date(System.currentTimeMillis());
+    @Column(nullable = false)
     private String author;
+    @Column(nullable = false)
     private String status;
 
     public Accident() {
