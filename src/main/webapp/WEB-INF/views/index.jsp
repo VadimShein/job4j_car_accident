@@ -30,6 +30,9 @@
 </head>
 <body>
 <div class="container">
+    <div class="row" id="login">
+        <a class="nav-link" href="<c:url value="/login?logout=true"/>"> <c:out value="${userName}"/> | Выйти</a>
+    </div>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
