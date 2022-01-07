@@ -11,7 +11,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
-public class AccidentMemStore implements AccidentStore {
+public class AccidentMemStore {
     private static final AtomicInteger COUNT = new AtomicInteger();
     private final HashMap<Integer, Accident> accidents = new HashMap<>();
     private final HashMap<Integer, AccidentType> accidentTypes = new HashMap<>();

@@ -1,22 +1,24 @@
 package ru.job4j.accident.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentHibernate;
+import ru.job4j.accident.repository.AccidentRepository;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 @Service
 public class AccidentService {
-    private final AccidentHibernate store;
+    private final AccidentRepository store;
 
-    public AccidentService(AccidentHibernate store) {
+    public AccidentService(AccidentRepository  store) {
         this.store = store;
     }
 
+    @Transactional
     public void add(Accident accident, String[] ids) {
         accident.setType(getType(accident.getType().getId()));
         HashSet<Rule> rules = new HashSet<>();
@@ -24,7 +26,7 @@ public class AccidentService {
             rules.add(getRule(Integer.parseInt(rId)));
         }
         accident.setRules(rules);
-        store.add(accident);
+        store.save(accident);
     }
 
     public Accident get(int id) {
@@ -32,9 +34,8 @@ public class AccidentService {
     }
 
     public Collection<Accident> getAll() {
-        return store.getAll();
+        return  store.getAll();
     }
-
 
     public AccidentType getType(int id) {
         return store.getType(id);
