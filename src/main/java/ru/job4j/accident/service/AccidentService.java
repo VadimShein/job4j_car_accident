@@ -5,16 +5,16 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentRepository;
+import ru.job4j.accident.repository.AccidentBaseRepository;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 @Service
 public class AccidentService {
-    private final AccidentRepository store;
+    private final AccidentBaseRepository store;
 
-    public AccidentService(AccidentRepository  store) {
+    public AccidentService(AccidentBaseRepository store) {
         this.store = store;
     }
 
@@ -37,6 +37,7 @@ public class AccidentService {
         return  store.getAll();
     }
 
+    @Transactional
     public AccidentType getType(int id) {
         return store.getType(id);
     }
