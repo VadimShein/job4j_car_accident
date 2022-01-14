@@ -5,17 +5,24 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentBaseRepository;
+import ru.job4j.accident.repository.AccidentRepository;
+import ru.job4j.accident.repository.RuleRepository;
+import ru.job4j.accident.repository.TypeRepository;
 
 import java.util.Collection;
 import java.util.HashSet;
 
 @Service
 public class AccidentService {
-    private final AccidentBaseRepository store;
+    private final AccidentRepository accidentRepository;
+    private final RuleRepository ruleRepository;
+    private final TypeRepository typeRepository;
 
-    public AccidentService(AccidentBaseRepository store) {
-        this.store = store;
+    public AccidentService(AccidentRepository accidentRepository, RuleRepository ruleRepository,
+                           TypeRepository typeRepository) {
+        this.accidentRepository = accidentRepository;
+        this.ruleRepository = ruleRepository;
+        this.typeRepository = typeRepository;
     }
 
     @Transactional
@@ -26,32 +33,30 @@ public class AccidentService {
             rules.add(getRule(Integer.parseInt(rId)));
         }
         accident.setRules(rules);
-        store.save(accident);
+        accidentRepository.save(accident);
     }
 
     public Accident get(int id) {
-        return store.get(id);
+        return accidentRepository.get(id);
     }
 
     public Collection<Accident> getAll() {
-        return  store.getAll();
+        return  accidentRepository.getAll();
     }
 
-    @Transactional
     public AccidentType getType(int id) {
-        return store.getType(id);
+        return typeRepository.getType(id);
     }
 
-    public Collection<AccidentType> getAllTypes() {
-        return store.getAllTypes();
+    public Iterable<AccidentType> getAllTypes() {
+        return typeRepository.findAll();
     }
-
 
     public Rule getRule(int id) {
-        return store.getRule(id);
+        return ruleRepository.getRule(id);
     }
 
-    public Collection<Rule> getAllRules() {
-        return store.getAllRules();
+    public Iterable<Rule> getAllRules() {
+        return ruleRepository.findAll();
     }
 }

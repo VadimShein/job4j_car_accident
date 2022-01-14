@@ -13,7 +13,6 @@ import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 
 @Controller
 public class AccidentControl {
@@ -32,8 +31,8 @@ public class AccidentControl {
 
     @GetMapping("/create")
     public String create(Model model) {
-        Collection<AccidentType> types = service.getAllTypes();
-        Collection<Rule> rules = service.getAllRules();
+        Iterable<AccidentType> types = service.getAllTypes();
+        Iterable<Rule> rules = service.getAllRules();
         model.addAttribute("types", types);
         model.addAttribute("rules", rules);
         model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
@@ -44,8 +43,8 @@ public class AccidentControl {
     public String edit(Model model, @RequestParam("itemId") String itemId) {
         Accident accident = service.get(Integer.parseInt(itemId));
         model.addAttribute(accident);
-        Collection<AccidentType> types = service.getAllTypes();
-        Collection<Rule> rules = service.getAllRules();
+        Iterable<AccidentType> types = service.getAllTypes();
+        Iterable<Rule> rules = service.getAllRules();
         model.addAttribute("types", types);
         model.addAttribute("rules", rules);
         model.addAttribute("userName", SecurityContextHolder.getContext().getAuthentication().getName());
