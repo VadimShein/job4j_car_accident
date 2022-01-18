@@ -1,10 +1,13 @@
 CREATE TABLE users (
-    username VARCHAR(50) primary key NOT NULL,
+    id serial primary key,
+    username VARCHAR(50) NOT NULL unique,
     password VARCHAR(100) NOT NULL,
-    enabled boolean default true
+    enabled boolean default true,
+    authority_id int not null references authorities(id)
 );
 
 CREATE TABLE authorities (
-    username VARCHAR(50) NOT NULL references users(username),
-    authority VARCHAR(50) NOT NULL
+    id serial primary key,
+    authority VARCHAR(50) NOT NULL unique
 );
+

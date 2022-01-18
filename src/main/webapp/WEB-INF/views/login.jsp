@@ -70,6 +70,9 @@
                     <button type="submit" class="btn btn-primary" onclick="return validate()">Войти</button>
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                 </form>
+                <form action="<c:url value='/reg'/>">
+                    <button type="submit" class="btn btn-primary">Регистрация</button>
+                </form>
             </div>
         </div>
     </div>

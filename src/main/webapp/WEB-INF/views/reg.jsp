@@ -40,58 +40,33 @@
         }
     </script>
 
-    <title>New accident</title>
+    <title>Registration</title>
 </head>
-
 <body>
-<div class="container">
-    <div class="row" id="login">
-        <a class="nav-link" href="<c:url value="/login?logout=true"/>"> <c:out value="${userName}"/> | Выйти</a>
+<div class="container pt-3">
+    <div class="row">
+        <c:if test="${not empty errorMessage}">
+            <div style="color:#ff0000; font-weight: bold; margin: 30px 0;">
+                    ${errorMessage}
+            </div>
+        </c:if>
     </div>
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <h3>Новый инцидент</h3>
+                <h3>Регистрация</h3>
             </div>
             <div class="card-body">
-                <form action="<c:url value='/save'/>" method="post">
+                <form name="login" action="<c:url value='/reg'/>" method="POST">
                     <div class="form-group">
-                        <div id="type">
-                            <label for="typeSel">Тип проишествия: &nbsp</label>
-                            <select id="typeSel" name="type.id">
-                                <c:forEach var="type" items="${types}" >
-                                    <option value="${type.id}">${type.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div id="rule">
-                            <label for="ruleSel" style="vertical-align: top; margin-right: 82px">Статья: &nbsp</label>
-                            <select id="ruleSel" name="rIds" multiple required>
-                                <c:forEach var="rule" items="${rules}">
-                                    <option value="${rule.id}">${rule.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
-                        <div id="carNumber">
-                            <label>Номер Авто:</label>
-                            <input type="text" class="form-control" name="carNumber" title="Заполните поле: Номер Авто">
-                        </div>
-                        <div id="address">
-                            <label>Адрес:</label>
-                            <input type="text" class="form-control" name="address" title="Заполните поле: Адрес">
-                        </div>
-                        <div id="description">
-                            <label>Описание: </label>
-                            <textarea maxlength="255" rows="3" class="form-control" name="description" title="Заполните поле: Описание" style="height: 113px"></textarea>
-                        </div>
-                        <div id="author">
-                            <input type="hidden"  name="author" value="<c:out value="${userName}"/>">
-                        </div>
-                        <div id="status">
-                            <input type="hidden"  name="status" value="Processed">
-                        </div>
+                        <label>Имя пользователя</label>
+                        <input type="text" class="form-control" name="username" title="Заполните поле: имя пользователя">
                     </div>
-                    <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>
+                    <div class="form-group">
+                        <label>Пароль</label>
+                        <input type="password" class="form-control" name="password" title="Заполните поле: пароль">
+                    </div>
+                    <button type="submit" class="btn btn-primary" onclick="return validate()">Зарегистрироваться</button>
                 </form>
             </div>
         </div>

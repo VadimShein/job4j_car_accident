@@ -1,20 +1,20 @@
 package ru.job4j.accident.model;
 
-import org.springframework.stereotype.Component;
-
+import javax.persistence.*;
 import java.util.Objects;
 
-@Component
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String name;
-
-    public User() {
-    }
-
-    public User(String name) {
-        this.name = name;
-    }
+    private String password;
+    private String username;
+    private boolean enabled;
+    @ManyToOne
+    @JoinColumn(name = "authority_id")
+    private Authority authority;
 
     public int getId() {
         return id;
@@ -24,12 +24,36 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Authority getAuthority() {
+        return authority;
+    }
+
+    public void setAuthority(Authority authority) {
+        this.authority = authority;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     @Override
