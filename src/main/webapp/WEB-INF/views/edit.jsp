@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -51,18 +51,17 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <h3>Редактирование инцидента</h3>
+                <h3>Редактирование инцидента №: <c:out value="${accident.id}"/></h3>
             </div>
             <div class="card-body">
                 <form action="<c:url value='/save'/>" method="post">
-                    <div class="form-group">
+                    <div class="form">
                         <div id="id">
-                            <label>№: <c:out value="${accident.id}"/></label><br>
                             <input type="hidden" name="id" value="${accident.id}">
                         </div>
-                        <div id="type">
-                            <label for="typeSel">Тип проишествия: &nbsp</label>
-                            <select id="typeSel" name="type.id">
+                        <div class="form-group" id="type">
+                            <label for="typeSel" >Тип проишествия: &nbsp</label>
+                            <select id="typeSel" name="type.id" style="width: 280px">
                                 <option value="${accident.type.id}">${accident.type.name}</option>
                                 <c:forEach var="type" items="${types}" >
                                     <c:if test="${type.id != accident.type.id}">
@@ -71,9 +70,19 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div id="rule">
+                        <div class="form-group" id="status">
+                            <label for="statusSel" style="margin-right: 83px">Статус: &nbsp</label>
+                            <select id="statusSel" name="status" style="width: 280px">
+                                <option value="${accident.status}" selected>${accident.status}</option>
+                                <option value="На рассмотрении">На рассмотрении</option>
+                                <option value="Отклонено">Отклонено</option>
+                                <option value="Завершено">Завершено</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group" id="rule">
                             <label for="ruleSel" style="vertical-align: top; margin-right: 82px">Статья: &nbsp</label>
-                            <select id="ruleSel" name="rIds" multiple required>
+                            <select id="ruleSel" name="rIds" multiple required style="width: 280px">
                                 <c:forEach var="rule" items="${rules}">
                                     <c:set var="sel" value=""/>
                                     <c:forEach var="acdRule" items="${accident.rules}" >
@@ -85,24 +94,23 @@
                                 </c:forEach>
                             </select>
                         </div>
-                        <div id="carNumber">
-                            <label>Номер Авто:</label>
-                            <input type="text" class="form-control" name="carNumber" value="${accident.carNumber}" title="Заполните поле: Номер Авто">
+                        <div class="form-group" id="carNumber">
+                            <label style="float: left; margin-right: 53px">Номер Авто:</label>
+                            <input type="text" class="form-control" name="carNumber" value="${accident.carNumber}"
+                                   title="Заполните поле: Номер Авто" style="width: 280px">
                         </div>
-                        <div id="address">
-                            <label>Адрес:</label>
-                            <input type="text" class="form-control" name="address" value="${accident.address}" title="Заполните поле: Адрес">
+                        <div class="form-group" id="address">
+                            <label style="float: left; margin-right: 98px">Адрес:</label>
+                            <input type="text" class="form-control" name="address" value="${accident.address}"
+                                   title="Заполните поле: Адрес" style="width: 280px">
                         </div>
-                        <div id="description">
-                            <label>Описание:</label>
-                            <textarea maxlength="255" rows="3" class="form-control" name="description" title="Заполните поле: Описание" style="height: 113px">${accident.description}</textarea>
+                        <div class="form-group" id="description">
+                            <label style="float: left; margin-right: 70px">Описание:</label>
+                            <textarea maxlength="255" rows="3" class="form-control" name="description"
+                                      title="Заполните поле: Описание" style="height: 113px; width: 280px">${accident.description}</textarea>
                         </div>
                         <div id="author">
                             <input type="hidden" name="author" value="${accident.author}">
-                        </div>
-                        <div id="status">
-                            <label>Статус:</label>
-                            <input type="text" class="form-control" name="status" value="${accident.status}" title="Заполните поле: Статус">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>

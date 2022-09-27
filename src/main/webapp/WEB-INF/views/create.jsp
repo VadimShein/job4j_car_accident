@@ -55,40 +55,43 @@
             </div>
             <div class="card-body">
                 <form action="<c:url value='/save'/>" method="post">
-                    <div class="form-group">
-                        <div id="type">
+                    <div class="form">
+                        <div class="form-group" id="type">
                             <label for="typeSel">Тип проишествия: &nbsp</label>
-                            <select id="typeSel" name="type.id">
+                            <select id="typeSel" name="type.id" style="width: 280px">
                                 <c:forEach var="type" items="${types}" >
                                     <option value="${type.id}">${type.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div id="rule">
+                        <div id="status">
+                            <input type="hidden"  name="status" value="На рассмотрении"/>
+                        </div>
+                        <div class="form-group" id="rule">
                             <label for="ruleSel" style="vertical-align: top; margin-right: 82px">Статья: &nbsp</label>
-                            <select id="ruleSel" name="rIds" multiple required>
+                            <select id="ruleSel" name="rIds" multiple required style="width: 280px">
                                 <c:forEach var="rule" items="${rules}">
                                     <option value="${rule.id}">${rule.name}</option>
                                 </c:forEach>
                             </select>
                         </div>
-                        <div id="carNumber">
-                            <label>Номер Авто:</label>
-                            <input type="text" class="form-control" name="carNumber" title="Заполните поле: Номер Авто">
+                        <div class="form-group" id="carNumber">
+                            <label style="float: left; margin-right: 53px">Номер Авто:</label>
+                            <input type="text" class="form-control" name="carNumber"
+                                   title="Заполните поле: Номер Авто" style="width: 280px; float: end">
                         </div>
-                        <div id="address">
-                            <label>Адрес:</label>
-                            <input type="text" class="form-control" name="address" title="Заполните поле: Адрес">
+                        <div class="form-group" id="address">
+                            <label style="float: left; margin-right: 98px">Адрес:</label>
+                            <input type="text" class="form-control" name="address"
+                                   title="Заполните поле: Адрес" style="width: 280px">
                         </div>
-                        <div id="description">
-                            <label>Описание: </label>
-                            <textarea maxlength="255" rows="3" class="form-control" name="description" title="Заполните поле: Описание" style="height: 113px"></textarea>
+                        <div class="form-group" id="description">
+                            <label style="float: left; margin-right: 70px">Описание: </label>
+                            <textarea maxlength="255" rows="3" class="form-control" name="description"
+                                      title="Заполните поле: Описание" style="height: 113px; width: 280px"></textarea>
                         </div>
                         <div id="author">
                             <input type="hidden"  name="author" value="<c:out value="${userName}"/>">
-                        </div>
-                        <div id="status">
-                            <input type="hidden"  name="status" value="Processed">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>

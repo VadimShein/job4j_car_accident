@@ -49,8 +49,7 @@
                 <table class="table table-bordered" style="table-layout: fixed">
                     <thead>
                     <tr>
-                        <th style="width: 40px; text-align: center">№</th>
-                        <th style="width: 170px; text-align: center">Фото</th>
+                        <th style="width: 50px; text-align: center">№</th>
                         <th style="text-align: center">Тип</th>
                         <th style="text-align: center">Статья</th>
                         <th style="text-align: center">Описание</th>
@@ -68,7 +67,6 @@
                                 <c:out value="${map.id}"/>
                                 <a href="<c:url value='/edit?itemId=${map.id}'/>"><i class="fa fa-edit"></i></a>
                             </td>
-                            <td><c:out value="${map.photo}"/></td>
                             <td><c:out value="${map.type.name}"/></td>
                             <td>
                                 <c:forEach items="${map.rules}" var="rule">
