@@ -51,7 +51,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <h3>Новый инцидент</h3>
+                <h3>Новое проишествие</h3>
             </div>
             <div class="card-body">
                 <form action="<c:url value='/save'/>" method="post">

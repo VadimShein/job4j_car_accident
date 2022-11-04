@@ -41,7 +41,7 @@ public class AccidentJdbcTemplate {
                     ps.setString(1, accident.getCarNumber());
                     ps.setString(2, accident.getAddress());
                     ps.setString(3, accident.getDescription());
-                    ps.setTimestamp(4, new Timestamp(accident.getCreated().getTime()));
+                    ps.setTimestamp(4, new Timestamp(accident.getCreated().getTime().getTime()));
                     ps.setString(5, accident.getAuthor());
                     ps.setString(6, accident.getStatus());
                     ps.setInt(7, accident.getType().getId());
@@ -57,7 +57,7 @@ public class AccidentJdbcTemplate {
         jdbc.update("update accident set carnumber=?, address=?, description=?, created=?, author=?, "
                         + "status=?, type_id=? where id=?",
                 accident.getCarNumber(), accident.getAddress(), accident.getDescription(),
-                new Timestamp(accident.getCreated().getTime()), accident.getAuthor(), accident.getStatus(), accident.getType().getId(), accident.getId());
+                new Timestamp(accident.getCreated().getTime().getTime()), accident.getAuthor(), accident.getStatus(), accident.getType().getId(), accident.getId());
         jdbc.update("delete from accident_rules where accident_id=?", accident.getId());
         for (String rId : ids) {
             jdbc.update("insert into accident_rules (accident_id, rules_id) values (?, ?)",
@@ -66,19 +66,19 @@ public class AccidentJdbcTemplate {
     }
 
     public Accident get(int id) {
-        return jdbc.queryForObject("select ac.*, ac_t.type_name, r.* from accident ac "
-                        + "inner join types ac_t on ac.type_id=ac_t.type_id "
+        return jdbc.queryForObject("select ac.*, ac_t.name, r.* from accident ac "
+                        + "inner join types ac_t on ac.type_id=ac_t.id "
                         + "left outer join accident_rules ac_r on ac.id=ac_r.accident_id "
-                        + "left outer join rules r on ac_r.rules_id=r.rule_id where ac.id=?", new Object[]{id},
+                        + "left outer join rules r on ac_r.rules_id=r.id where ac.id=?", new Object[]{id},
                 (rs, row) -> findAccident(rs, new ArrayList<>()).get(0));
     }
 
     public List<Accident> getAll() {
         List<Accident> list = new ArrayList<>();
-        jdbc.query("select ac.*, ac_t.type_name, r.* from accident ac "
-                        + "inner join types ac_t on ac.type_id=ac_t.type_id "
+        jdbc.query("select ac.*, ac_t.name, r.* from accident ac "
+                        + "inner join types ac_t on ac.type_id=ac_t.id "
                         + "left outer join accident_rules ac_r on ac.id=ac_r.accident_id "
-                        + "left outer join rules r on ac_r.rules_id=r.rule_id order by ac.id",
+                        + "left outer join rules r on ac_r.rules_id=r.id order by ac.id",
                 (rs, row) -> findAccident(rs, list));
         return list;
     }
@@ -89,7 +89,9 @@ public class AccidentJdbcTemplate {
         accident.setCarNumber(rs.getString("carNumber"));
         accident.setAddress(rs.getString("address"));
         accident.setDescription(rs.getString("description"));
-        accident.setCreated(rs.getTimestamp("created"));
+        Calendar cal = new GregorianCalendar();
+        cal.setTimeInMillis(rs.getTimestamp("created").getTime());
+        accident.setCreated(cal);
         accident.setAuthor(rs.getString("author"));
         accident.setStatus(rs.getString("status"));
 
@@ -114,11 +116,11 @@ public class AccidentJdbcTemplate {
     }
 
     public void addType(AccidentType type) {
-        jdbc.update("insert into types(type_id, type_name) values(?, ?)", type.getId(), type.getName());
+        jdbc.update("insert into types(id, name) values(?, ?)", type.getId(), type.getName());
     }
 
     public AccidentType getType(int id) {
-        return jdbc.queryForObject("select * from types where type_id=?", new Object[]{id},
+        return jdbc.queryForObject("select * from types where id=?", new Object[]{id},
                 (rs, row) -> new AccidentType(rs.getInt("type_id"), rs.getString("type_name")));
     }
 
@@ -128,11 +130,11 @@ public class AccidentJdbcTemplate {
     }
 
     public void addRule(Rule rule) {
-        jdbc.update("insert into rules(rule_id, rule_name) values(?, ?)", rule.getId(), rule.getName());
+        jdbc.update("insert into rules(id, name) values(?, ?)", rule.getId(), rule.getName());
     }
 
     public Rule getRule(int id) {
-        return jdbc.queryForObject("select * from rules where rule_id=?", new Object[]{id},
+        return jdbc.queryForObject("select * from rules where id=?", new Object[]{id},
         (rs, row) -> new Rule(rs.getInt("rule_id"), rs.getString("rule_name")));
     }
 

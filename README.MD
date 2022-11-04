@@ -11,9 +11,9 @@
 
 ## Используемые технологии:
 * Java 13
-* Spring, Spring Security, Tomcat
+* Spring MVC, Spring Data, Spring Security, Tomcat
 * HTML, Bootstrap, CSS, JSP, JSTL
-* JDBC, Hibernate, PostgreSQL
+* PostgreSQL
 * Maven
 
 ## Скриншоты:
@@ -23,15 +23,15 @@
 
 2. Главная страница. Список призошедших нарушений
 
-![ScreenShot](./images/image_2.PNG)
+![ScreenShot](./images/image2.PNG)
 
 3. Страница добавления нового нарушения
 
-![ScreenShot](./images/image_3.PNG)
+![ScreenShot](./images/image3.PNG)
 
 4. Страница редактирования нарушения
 
-![ScreenShot](./images/image_4.PNG)
+![ScreenShot](./images/image4.PNG)
 
 
 ## Запуск проекта:

@@ -51,7 +51,7 @@
     <div class="row">
         <div class="card" style="width: 100%">
             <div class="card-header">
-                <h3>Редактирование инцидента №: <c:out value="${accident.id}"/></h3>
+                <h3>Редактирование проишествия № <c:out value="${accident.id}"/></h3>
             </div>
             <div class="card-body">
                 <form action="<c:url value='/save'/>" method="post">

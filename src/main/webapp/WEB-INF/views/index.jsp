@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,6 +29,13 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <style>
+        table {
+            text-align: center;
+        }
+
+    </style>
+
     <title>Accidents</title>
 </head>
 <body>
@@ -42,7 +52,7 @@
                 <form action="<c:url value="/create"/>">
                     <div class="form-group row">
                         <div class="col-sm-5">
-                            <button type="submit" class="btn btn-primary">Добавить инцидент</button>
+                            <button type="submit" class="btn btn-primary">Добавить проишествие</button>
                         </div>
                     </div>
                 </form>
@@ -76,9 +86,9 @@
                             <td><c:out value="${map.description}"/></td>
                             <td><c:out value="${map.carNumber}"/></td>
                             <td><c:out value="${map.address}"/></td>
-                            <td><c:out value="${map.created}"/></td>
-                            <td><c:out value="${map.author}"/></td>
-                            <td><c:out value="${map.status}"/></td>
+                            <td ><fmt:formatDate type="time" value="${map.created.time}" pattern="dd.MM.yyyy HH:mm:ss"/></td>
+                            <td ><c:out value="${map.author}"/></td>
+                            <td ><c:out value="${map.status}"/></td>
                         </tr>
                     </c:forEach>
                     </tbody>

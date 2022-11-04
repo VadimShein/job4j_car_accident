@@ -4,9 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.File;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Component
 @Entity
@@ -28,7 +26,8 @@ public class Accident {
     @Column(nullable = false)
     private String address;
     private String description;
-    private Date created = new Date(System.currentTimeMillis());
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar created = new GregorianCalendar();
     @Column(nullable = false)
     private String author;
     @Column(nullable = false)
@@ -112,11 +111,11 @@ public class Accident {
         this.author = author;
     }
 
-    public Date getCreated() {
+    public Calendar getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Calendar created) {
         this.created = created;
     }
 
